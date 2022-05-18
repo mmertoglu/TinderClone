@@ -1,11 +1,6 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-    container:{
-        flex:1,
-        justifyContent:'center',
-        alignItems:'center',
-      },
       image:{
         height:'100%',
         width:'100%',
@@ -16,10 +11,9 @@ export default StyleSheet.create({
       },
       card_container:{
         width:'90%',
-        backgroundColor:'red',
         height:'70%',
         borderRadius:10,
-        elevation:20,
+        elevation:10,
         
     
       },
