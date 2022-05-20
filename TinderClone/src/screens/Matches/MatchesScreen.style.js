@@ -4,11 +4,11 @@ export default StyleSheet.create({
     matches_text:{
         fontSize:24,
         fontWeight:'bold',
-        color:'#F63A6E'
+        color:'#F63A6E',
+        margin:10
     },
     container:{
         flex:1,
-        padding:10,
         width:'100%'
     },
     image:{
@@ -30,5 +30,12 @@ export default StyleSheet.create({
     users_container:{
         flexDirection:'row',
         flexWrap:'wrap'
-    }
+    },
+    icon_container_top:{
+        flexDirection:'row',
+        width:'100%',
+        justifyContent:'space-around',
+        backgroundColor:'white',
+        paddingVertical:15
+      },
 })
