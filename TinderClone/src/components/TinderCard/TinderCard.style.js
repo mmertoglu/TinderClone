@@ -6,12 +6,13 @@ export default StyleSheet.create({
         width:'100%',
         borderRadius:10,
         overflow:'hidden',
-        justifyContent:'flex-end'
+        justifyContent:'flex-end',
+        
         
       },
       card_container:{
         width:'90%',
-        height:'70%',
+        height:'100%',
         borderRadius:10,
         elevation:10,
         
