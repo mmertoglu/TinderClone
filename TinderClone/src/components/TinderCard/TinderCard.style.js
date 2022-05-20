@@ -15,6 +15,7 @@ export default StyleSheet.create({
         height:'100%',
         borderRadius:10,
         elevation:10,
+        backgroundColor:'white'
         
     
       },
