@@ -27,11 +27,5 @@ export default [
       'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/jeff.jpeg',
     bio: 'CEO, entrepreneur born in 1964, Jeffrey, Jeffrey Bezos',
   },
-  {
-    id: '5',
-    name: 'Vadim Savin',
-    image:
-      'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim1.JPG',
-    bio: 'Hola',
-  },
+  
 ];
