@@ -34,7 +34,7 @@ const HomeScreen = (props) => {
       <Fontisto name='tinder' color={'#F63A6E'} size={30} />
       <MaterialCommunityIcons name='star-four-points' size={30} color={color} />
       <IonIcons name='ios-chatbubbles' size={30} color={color} onPress={handleMatchesScreen} />
-      <FontAwesome name='user' color={color} size={30} />
+      <FontAwesome name='user' color={color} size={30} onPress={()=>props.navigation.navigate('ProfileScreen')} />
       </View>
       <AnimatedStack
         data={users}
