@@ -13,6 +13,7 @@ const UserInfo = (props) => {
     const [photo,setPhoto] = useState(null);
     const [bio,setBio] = useState(null);
 
+
     const incompleteAllInputs = !name || !age || !gender || !photo || !bio
 
     const updateProfile = () => {

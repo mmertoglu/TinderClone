@@ -23,8 +23,8 @@ const {data,renderItem,onSwipeRight,onSwipeLeft} = props;
     
   const [currentindex, setCurrentIndex] = useState(0)
   const [nextCardNumber, setNextCardNumber] = useState(currentindex + 1)
-  const nextProfile = data[nextCardNumber]
-  const currentUser = data[currentindex]
+  const nextProfile = data
+  const currentUser = data
   const { width: screenWidth } = useWindowDimensions();
   const hiddenTranslationX = 2 * screenWidth;
   const translateX = useSharedValue(0)
@@ -103,17 +103,26 @@ const {data,renderItem,onSwipeRight,onSwipeLeft} = props;
      {nextProfile &&(
       <View style={styles.next_card} >
         <Animated.View style={[styles.card_style, next_cardStyle]} >
-          {renderItem({item : nextProfile })}
+          {renderItem({item : currentUser })}
         </Animated.View>
       </View> )
       }
-      <PanGestureHandler onGestureEvent={gestureHandler} >
-        <Animated.View style={[styles.card_style, cardStyle]} >
-          <Animated.Image source={Like} style={[styles.like,{left:20},like_Style]} resizeMode='contain' />
-          <Animated.Image source={Nope} style={[styles.like,{right:10},nope_style]}  />
-          {renderItem({item : currentUser })}
-        </Animated.View>
-      </PanGestureHandler>
+      {currentUser? (
+         <PanGestureHandler onGestureEvent={gestureHandler} >
+         <Animated.View style={[styles.card_style, cardStyle]} >
+           <Animated.Image source={Like} style={[styles.like,{left:20},like_Style]} resizeMode='contain' />
+           <Animated.Image source={Nope} style={[styles.like,{right:10},nope_style]}  />
+           {renderItem({item : currentUser })}
+         </Animated.View>
+       </PanGestureHandler>
+      ) : (
+        <View>
+          <Text>No profile found</Text>
+        </View>
+      )
+      
+    }
+     
     </GestureHandlerRootView>
   )
 }

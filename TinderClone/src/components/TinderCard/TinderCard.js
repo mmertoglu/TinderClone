@@ -3,16 +3,16 @@ import {View,Text,ImageBackground} from 'react-native'
 import styles from './TinderCard.style'
 
 
-const TinderCard = (props) => {
-    const {name,image,bio} = props.user;
+const TinderCard = ({user}) => {
+   
     return(
         <View style={styles.card_container} >
         <ImageBackground
         resizeMode='cover'
         style={styles.image}
-        source={{uri:image}} >
-          <Text style={styles.user_text} >{name}</Text>
-          <Text style={styles.bio_text} >{bio}</Text>
+        source={{uri:user.photourl}} >
+          <Text style={styles.user_text} >{user.name}</Text>
+          <Text style={styles.bio_text} >{user.bio}</Text>
         </ImageBackground>
         </View>
     )
