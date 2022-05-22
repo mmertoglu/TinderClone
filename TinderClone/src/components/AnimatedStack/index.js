@@ -23,8 +23,8 @@ const {data,renderItem,onSwipeRight,onSwipeLeft} = props;
     
   const [currentindex, setCurrentIndex] = useState(0)
   const [nextCardNumber, setNextCardNumber] = useState(currentindex + 1)
-  const nextProfile = data
-  const currentUser = data
+  const nextProfile = data[nextCardNumber]
+  const currentUser = data[currentindex]
   const { width: screenWidth } = useWindowDimensions();
   const hiddenTranslationX = 2 * screenWidth;
   const translateX = useSharedValue(0)
@@ -103,7 +103,7 @@ const {data,renderItem,onSwipeRight,onSwipeLeft} = props;
      {nextProfile &&(
       <View style={styles.next_card} >
         <Animated.View style={[styles.card_style, next_cardStyle]} >
-          {renderItem({item : currentUser })}
+          {renderItem({item : nextProfile })}
         </Animated.View>
       </View> )
       }

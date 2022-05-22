@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, TextInput ,TouchableOpacity} from 'react-native'
 import styles from './UserInfo.style'
 import Fontisto from 'react-native-vector-icons/Fontisto'
-import firestore from '@react-native-firebase/firestore'
+import database from '@react-native-firebase/database'
 import auth from '@react-native-firebase/auth'
 
 const UserInfo = (props) => {
-    const user = auth().currentUser.email
     const [name,setName] = useState(null);
     const [age,setAge] = useState(null);
     const [gender,setGender] = useState(null);
@@ -16,17 +15,28 @@ const UserInfo = (props) => {
 
     const incompleteAllInputs = !name || !age || !gender || !photo || !bio
 
+   
     const updateProfile = () => {
-        firestore().collection('users').doc(user).set({
-            name:name,
-            age:age,
-            gender:gender,
-            photourl:photo,
-            bio:bio
-        }).then(()=>{
-            props.navigation.navigate('HomeScreen')
-        })
+        const userMail = auth().currentUser.email.split('@',1).toString()
+        try {
+            const contentData = {
+                id:userMail,
+                name: name,
+                age: age,
+                gender : gender,
+                photourl:photo,
+                bio:bio
+               
+            }
+          
+            console.log(userMail)
+             database().ref('users/'+userMail).set(contentData)
+             props.navigation.navigate('HomeScreen')
+        } catch (error) {
+            console.log(error)
+        }
     }
+    
           
  
 

@@ -10,7 +10,8 @@ import IonIcons from 'react-native-vector-icons/Ionicons'
 import Fontisto from 'react-native-vector-icons/Fontisto'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Entypo from 'react-native-vector-icons/Entypo'
-import firestore from '@react-native-firebase/firestore'
+import database from '@react-native-firebase/database'
+import ParseContent from '../../utils/ParseContent';
 
 const onSwipeLeft = (user) => {
   console.warn('Swipe Left', user.name)
@@ -23,20 +24,16 @@ const onSwipeRight = (user) => {
 const color = '#b5b5b5'
 
 const HomeScreen = (props) => {
-  const currentuser = auth().currentUser.email
   const [data, setData] = useState([])
-  useEffect(() => {
-      const fetchQuery = async () => {
-      await firestore().collection('users').get().then(snapshot => {
-        snapshot.docs.forEach(doc => {
-          console.log('user name : ' , (doc.data()))
-          setData(doc.data())
-          console.log(data)
-          
+  React.useEffect(() => {
+    database()
+        .ref(`users/`)
+        .on('value', snapshot => {
+            const newContentData = snapshot.val();
+            const ParsedData = ParseContent(newContentData)
+            setData(ParsedData)
+            console.log(data)
         })
-      })
-  }
-fetchQuery();
 }, [])
  
   
@@ -54,6 +51,7 @@ fetchQuery();
       <IonIcons name='ios-chatbubbles' size={30} color={color} onPress={handleMatchesScreen} />
       <FontAwesome name='user' color={color} size={30} onPress={()=>props.navigation.navigate('ProfileScreen')} />
       </View>
+     
       <AnimatedStack
         data={data}
         renderItem={(({ item }) => <TinderCard user={item} />)}

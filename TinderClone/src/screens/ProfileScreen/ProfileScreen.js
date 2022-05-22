@@ -3,31 +3,29 @@ import { View, Text, Image } from 'react-native'
 import firestore from '@react-native-firebase/firestore'
 import auth from '@react-native-firebase/auth'
 import styles from './ProfileScreen.style'
-
+import database from '@react-native-firebase/database'
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import IonIcons from 'react-native-vector-icons/Ionicons'
 import Fontisto from 'react-native-vector-icons/Fontisto'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Entypo from 'react-native-vector-icons/Entypo'
 import { TouchableOpacity } from "react-native-gesture-handler";
+import ParseContent from "../../utils/ParseContent";
 
 
 const color = '#b5b5b5'
 const ProfileScreen = (props) => {
-    const currentuser = auth().currentUser.email
+    const currentuser = auth().currentUser.email.split('@',1).toString()
     const [data, setData] = useState([])
-    useEffect(() => {
-        const fetchQuery = async () => {
-            await firestore().collection('users').doc(currentuser).get().then((snapshot) => {
-                if (snapshot.exists) {
-                    setData(snapshot.data());
-                } else {
-                    console.log('error')
-                }
-            })
-        }
-        fetchQuery();
-    }, [currentuser])
+    React.useEffect(() => {
+      database()
+          .ref('users/'+currentuser)
+          .once('value')
+          .then(snapshot => {
+            setData(snapshot.val())
+          })
+          
+  }, [])
 
 
     return (
