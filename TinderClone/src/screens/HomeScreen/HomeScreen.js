@@ -14,10 +14,17 @@ import database from '@react-native-firebase/database'
 import ParseContent from '../../utils/ParseContent';
 
 const onSwipeLeft = (user) => {
-  console.warn('Swipe Left', user.name)
+  
 };
 const onSwipeRight = (user) => {
-  console.warn('Swipe Right', user.name)
+  const userMail = auth().currentUser.email.split('@',1).toString()
+        try {
+            console.log(userMail)
+           const reference =   database().ref('users/'+userMail+'/liked').push();
+           reference.set(user)
+        } catch (error) {
+            console.log(error)
+        }
 }
 
 
